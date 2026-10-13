@@ -1,0 +1,114 @@
+:root {
+  --bg: #f7f7f9;
+  --fg: #1d1d22;
+  --muted: #6b6b76;
+  --card: #ffffff;
+  --border: #dedee5;
+  --accent: #4f46e5;
+  --up: #d9480f;
+  --down: #1971c2;
+  --zero: #2b8a3e;
+  --warn-bg: #fff4e0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15151a;
+    --fg: #ececf1;
+    --muted: #9a9aa6;
+    --card: #1f1f26;
+    --border: #33333d;
+    --accent: #8b85ff;
+    --up: #ff8a50;
+    --down: #5cabff;
+    --zero: #5fd47a;
+    --warn-bg: #3a2c12;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+}
+main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+h1 { margin: 0; font-size: 2rem; letter-spacing: .02em; }
+h2 { font-size: 1rem; margin: 24px 0 8px; }
+.lead { color: var(--muted); margin-top: 4px; }
+
+form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+}
+label { font-weight: 600; font-size: .9rem; }
+input[type=url], input[type=text] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 1rem;
+}
+input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.tabs { border: 0; padding: 0; margin: 8px 0 0; display: flex; gap: 16px; flex-wrap: wrap; }
+.tabs label { font-weight: 500; cursor: pointer; }
+.hint { color: var(--muted); font-size: .85rem; margin: 4px 0 0; }
+button {
+  margin-top: 8px;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: progress; }
+
+#status { margin-top: 20px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+#status.error { color: var(--up); }
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--accent);
+  animation: spin 1s linear infinite; flex: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#result { margin-top: 24px; }
+.headline {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+}
+.shift { font-size: 3.5rem; font-weight: 800; min-width: 3ch; text-align: center; font-variant-numeric: tabular-nums; }
+.shift.up { color: var(--up); }
+.shift.down { color: var(--down); }
+.shift.zero { color: var(--zero); }
+.summary { font-size: 1.25rem; font-weight: 700; }
+.detail { color: var(--muted); font-size: .9rem; }
+.warning { background: var(--warn-bg); padding: 10px 14px; border-radius: 8px; }
+
+.videos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+@media (max-width: 560px) { .videos { grid-template-columns: 1fr; } .shift { font-size: 2.6rem; } }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; min-width: 0; }
+.card:empty { display: none; }
+.card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; background: var(--border); }
+.card .role { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.card .title { font-weight: 600; overflow-wrap: anywhere; }
+.card .title a { color: inherit; }
+.card .meta { color: var(--muted); font-size: .85rem; }
+.card .key { font-size: 1.4rem; font-weight: 700; }
+
+.chart { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 140px; }
+.bar { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+.bar span { width: 100%; background: var(--border); border-radius: 4px 4px 0 0; min-height: 2px; }
+.bar.best span { background: var(--accent); }
+.bar small { font-size: .75rem; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+footer { margin-top: 32px; color: var(--muted); font-size: .8rem; }
