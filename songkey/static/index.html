@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SongKey</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>SongKey</h1>
+    <p class="lead">歌ってみた・カバー動画のURLを貼ると、原曲キーから何半音ずれているかを判定します。</p>
+  </header>
+
+  <form id="form">
+    <label for="cover">判定したい動画のURL</label>
+    <input id="cover" type="url" required placeholder="https://www.youtube.com/watch?v=...">
+
+    <fieldset class="tabs" role="radiogroup" aria-label="原曲の指定方法">
+      <label><input type="radio" name="mode" value="url" checked> 原曲の動画URLで比較</label>
+      <label><input type="radio" name="mode" value="key"> 原曲キーを入力</label>
+    </fieldset>
+
+    <div id="mode-url">
+      <label for="original">原曲（公式MVなど）のURL</label>
+      <input id="original" type="url" placeholder="https://www.youtube.com/watch?v=...">
+      <p class="hint">2つの音源の和音構成を比べてずれを求めます。こちらの方が精度が高いです。</p>
+    </div>
+    <div id="mode-key" hidden>
+      <label for="key">原曲キー</label>
+      <input id="key" type="text" placeholder="例: C, F#m, B♭, E♭m">
+      <p class="hint">動画のキーを推定し、入力されたキーと比べます。</p>
+    </div>
+
+    <button id="submit" type="submit">判定する</button>
+  </form>
+
+  <section id="status" hidden aria-live="polite"></section>
+
+  <section id="result" hidden>
+    <div class="headline">
+      <div id="shift" class="shift"></div>
+      <div>
+        <div id="summary" class="summary"></div>
+        <div id="detail" class="detail"></div>
+      </div>
+    </div>
+    <p id="warning" class="warning" hidden></p>
+    <div class="videos">
+      <article id="cover-card" class="card"></article>
+      <article id="original-card" class="card"></article>
+    </div>
+    <div id="chart-wrap" hidden>
+      <h2>シフトごとの一致度</h2>
+      <div id="chart" class="chart"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>解析は各動画の先頭約4分で行います。転調のある曲・アレンジが大きく異なるカバーでは誤判定することがあります。</p>
+  </footer>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
